@@ -1,9 +1,12 @@
-import { Router } from "express";
+import express from "express";
+import { SMSController } from "../controllers/smsController";
 
-const smsRouter = Router();
+const router = express.Router();
 
-smsRouter.post("/sms", (request, response) => {
-    const { phone, message } = request.body;
-})
+router
+    .get("/sms", SMSController.listarNotificationsAccepted)
+    .post("/sms", SMSController.smsNotificationAccepted)
+    .delete("/sms/:id", SMSController.smsNotificationRejected)
+    .put("/sms/:id", SMSController.atualizarSMS);
 
-export {smsRouter};
+export default router;

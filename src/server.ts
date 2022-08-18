@@ -1,6 +1,7 @@
 import express from "express";
 import { db } from "./config/dbConnect";
 import { SMS } from "./models/SMS";
+import { routes } from "./routes";
 
 db.on("error", console.log.bind(console, "connection error"));
 db.once("open", () => {
@@ -9,14 +10,8 @@ db.once("open", () => {
 
 const app = express();
 
-app.get('/sms', (request, response) => {
-    SMS.find((err, sms) => {
-        return response.json(sms);
-    })
-})
+app.use(express.json());
 
-app.get('/', (request, response) => {
-    return response.json({ message: 'Hello World' });
-});
+routes(app)
 
 app.listen(3333, () => console.log("Server started on port 3333"));
