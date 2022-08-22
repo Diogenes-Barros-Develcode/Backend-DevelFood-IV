@@ -4,7 +4,8 @@ import { notificationController } from "../controllers/notificationController";
 const router = express.Router();
 
 router
-    .get("/notification", notificationController.listarNotificationsAccepted)
-    .post("/notification", notificationController.notificationChangeState)
+    .get("/notification/:id", notificationController.listarNotificationsAccepted)
+    .post("/notification", notificationController.notificationCreateObject)
+    .put("/notification/:id", notificationController.notificationAtualizeState)
     
 export default router;
