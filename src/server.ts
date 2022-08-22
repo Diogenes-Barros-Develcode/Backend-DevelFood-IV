@@ -1,6 +1,6 @@
 import express from "express";
 import { db } from "./config/dbConnect";
-import { SMS } from "./models/SMS";
+import { allowNotification } from "./models/notification";
 import { routes } from "./routes";
 
 db.on("error", console.log.bind(console, "connection error"));
