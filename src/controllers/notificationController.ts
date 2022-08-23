@@ -4,7 +4,7 @@ import { allowNotification } from "../models/notification";
 class notificationController {
 
     static listarNotificationsAccepted = (request, response) => {
-        allowNotification.find((err, sms) => {
+        allowNotification.findOne((err, sms) => {
             return response.json(sms);
         })
     }
@@ -28,12 +28,7 @@ class notificationController {
         const id = request.params.id;
 
         allowNotification.findByIdAndUpdate(id, {
-            $set: {
-                userID: request.params.userID,
-                allowSMS: request.params.allowSMS,
-                allowEmail: request.params.allowEmail,
-                allowCall: request.params.allowCall,
-            }
+            $set: request.body
         }, (error) => {
           if(!error) {
             response.status(200).send({message: 'atualizado'})
