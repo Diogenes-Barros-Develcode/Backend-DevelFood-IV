@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
-const PrivacySchema = new mongoose.Schema({
+const NotificationConfigSchema = new mongoose.Schema({
     userID: {type: Number, required: true},
     allowSMS: {type: Boolean, require: true},
     allowEmail: {type: Boolean, require: true},
     allowCall: {type: Boolean, require: true},
 });
 
-const allowNotification = mongoose.model("PrivacySchema", PrivacySchema);
+const notificationConfig = mongoose.model("PrivacySchema", NotificationConfigSchema);
 
-export { allowNotification };
+export { notificationConfig };

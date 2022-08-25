@@ -1,18 +1,18 @@
-import { response } from "express";
-import { allowNotification } from "../models/notification";
+import { Request, Response, response } from "express";
+import { notificationConfig } from "../models/notification";
 
 class notificationController {
 
-    static listarNotificationsAccepted = (request, response) => {
-        allowNotification.findOne((err, sms) => {
+    static findUserNotification = (request, response: Response) => {
+        notificationConfig.findOne((err, sms) => {
             return response.json(sms);
         })
     }
 
-    static notificationCreateObject = (request, response) => {
+    static creatNotificationeObject = (request: Request, response: Response) => {
         console.log(request.body)
 
-        const notification = new allowNotification(request.body);
+        const notification = new notificationConfig(request.body);
 
         notification.save((error) => {
             if(!error) {
@@ -24,10 +24,10 @@ class notificationController {
         })
     }
 
-    static notificationAtualizeState = (request, response) => {
+    static handleNotificationState = (request: Request, response: Response) => {
         const id = request.params.id;
 
-        allowNotification.findByIdAndUpdate(id, {
+        notificationConfig.findByIdAndUpdate(id, {
             $set: request.body
         }, (error) => {
           if(!error) {
